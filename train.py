@@ -83,7 +83,6 @@ class CustomWandbLogger(WandbLogger):
         .. code-block:: python
             self.logger.experiment.some_wandb_function()
         """
-        os.environ["WANDB_MODE"] = "dryrun"
 
         if self._experiment is None:
             if self._offline:
@@ -105,7 +104,7 @@ class CustomWandbLogger(WandbLogger):
                 while True:
                     try:
                         print(self._wandb_init)
-                        self._experiment = wandb.init(**self._wandb_init)
+                        self._experiment = wandb.init(**self._wandb_init, mode="dryrun")
                         break
                     except Exception as e:
                         print("wandb Exception:\n", e)
