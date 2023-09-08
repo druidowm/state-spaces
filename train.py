@@ -84,8 +84,8 @@ class CustomWandbLogger(WandbLogger):
             self.logger.experiment.some_wandb_function()
         """
         if self._experiment is None:
-            if self._offline:
-                os.environ["WANDB_MODE"] = "dryrun"
+            #if self._offline:
+            #    os.environ["WANDB_MODE"] = "dryrun"
 
             attach_id = getattr(self, "_attach_id", None)
             if wandb.run is not None:
