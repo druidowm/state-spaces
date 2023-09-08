@@ -72,7 +72,6 @@ class CustomWandbLogger(WandbLogger):
         """Modified logger that insists on a wandb.init() call and catches wandb's error if thrown."""
 
         super().__init__(*args, **kwargs)
-        self._offline = True
 
     @property
     @rank_zero_experiment
@@ -84,6 +83,8 @@ class CustomWandbLogger(WandbLogger):
         .. code-block:: python
             self.logger.experiment.some_wandb_function()
         """
+        os.environ["WANDB_MODE"] = "dryrun"
+
         if self._experiment is None:
             if self._offline:
                 os.environ["WANDB_MODE"] = "dryrun"
