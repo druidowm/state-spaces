@@ -103,8 +103,8 @@ class CustomWandbLogger(WandbLogger):
                 # create new wandb process
                 while True:
                     try:
-                        print(self._wandb_init)
-                        self._experiment = wandb.init(**self._wandb_init, mode="dryrun")
+                        self._wandb_init["mode"] = "dryrun"
+                        self._experiment = wandb.init(**self._wandb_init)
                         break
                     except Exception as e:
                         print("wandb Exception:\n", e)
