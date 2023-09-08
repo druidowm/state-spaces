@@ -185,13 +185,12 @@ class CIFAR10(ImageResolutionSequenceDataset):
         transform_train = torchvision.transforms.Compose(transforms_train)
         transform_eval = torchvision.transforms.Compose(transforms_eval)
         self.dataset_train = torchvision.datasets.CIFAR10(
-            f"data/cifar-10-python.tar",
+            f"data/cifar",
             train=True,
-            download=True,
             transform=transform_train,
         )
         self.dataset_test = torchvision.datasets.CIFAR10(
-            f"data/cifar-10-python.tar", train=False, transform=transform_eval
+            f"data/cifar", train=False, transform=transform_eval
         )
 
         if self.rescale:
