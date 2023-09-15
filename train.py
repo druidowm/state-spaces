@@ -83,7 +83,6 @@ class CustomWandbLogger(WandbLogger):
         .. code-block:: python
             self.logger.experiment.some_wandb_function()
         """
-
         if self._experiment is None:
             if self._offline:
                 os.environ["WANDB_MODE"] = "dryrun"
@@ -103,7 +102,6 @@ class CustomWandbLogger(WandbLogger):
                 # create new wandb process
                 while True:
                     try:
-                        self._wandb_init["mode"] = "dryrun"
                         self._experiment = wandb.init(**self._wandb_init)
                         break
                     except Exception as e:
@@ -168,6 +166,7 @@ class SequenceLightningModule(pl.LightningModule):
         ) + utils.to_list(self.hparams.decoder)
 
         # Instantiate model
+        print(self.hparams.model)
         self.model = utils.instantiate(registry.model, self.hparams.model)
         if (name := self.hparams.train.post_init_hook['_name_']) is not None:
             kwargs = self.hparams.train.post_init_hook.copy()
