@@ -47,6 +47,7 @@ class S4Block(SequenceModule):
         gate_act=None,
         mult_act=None,
         final_act='glu',
+        pregate=None,
         postact=None,
         initializer=None,
         weight_norm=False,
@@ -96,6 +97,17 @@ class S4Block(SequenceModule):
                     activate=False,
                     weight_norm=weight_norm,
                 )
+
+        if pregate is not None:
+            self.pregate = LinearActivation(
+                self.d_model,
+                self.d_model,
+                transposed=False,
+                initializer=initializer,
+                activation=pregate,
+                activate=True,
+                weight_norm=weight_norm,
+            )
 
         # Currently this module only uses FFTConv for its inner module
         # But the options here are all agnostic to the inner block
@@ -164,6 +176,8 @@ class S4Block(SequenceModule):
             v = self.input_gate(x)
         if self.bottleneck is not None:
             x = self.input_linear(x)
+        if self.pregate is not None:
+            x = x * self.pregate(x)
 
         y, state = self.layer(x, **kwargs)
 
@@ -195,6 +209,9 @@ class S4Block(SequenceModule):
             v = self.input_gate(x)
         if self.bottleneck is not None:
             x = self.input_linear(x)
+        if self.pregate is not None:
+            x = x * self.pregate(x)
+
         y, next_state = self.layer.step(x, state) # (B C H)
         if self.gate is not None:
             y = self.output_gate(y)
