@@ -63,6 +63,8 @@ class S4Block(SequenceModule):
         self.transposed = transposed
 
         self.gate = gate
+        self.pregate = pregate
+        print(pregate)
         self.bottleneck = bottleneck
 
         if bottleneck is not None:
@@ -108,6 +110,7 @@ class S4Block(SequenceModule):
                 activate=True,
                 weight_norm=weight_norm,
             )
+        
 
         # Currently this module only uses FFTConv for its inner module
         # But the options here are all agnostic to the inner block
