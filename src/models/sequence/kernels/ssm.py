@@ -77,6 +77,7 @@ else:
     _resolve_conj = lambda x: x.conj()
 
 def inv_transform(param, transform='none'):
+    print(transform)
     """Initialize a (positive) parameter under a transform."""
     param = torch.clamp(param, min=1e-4)
     if transform == 'none':
@@ -97,6 +98,7 @@ def param_transform(param, transform='none'):
         p = param
     elif transform == 'exp':
         p = torch.exp(param)
+        print(p)
     elif transform == 'relu':
         # JAX version seems to NaN if you allow 0's, although this code was fine without it
         p = F.relu(param)+1e-4

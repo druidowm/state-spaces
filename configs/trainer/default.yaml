@@ -1,6 +1,6 @@
 # See Docs for full flags and descriptions
 # https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#trainer-class-api
-accelerator: gpu
+accelerator: cpu #gpu
 strategy: auto
 devices: 1
 accumulate_grad_batches: 1 # Gradient accumulation every n batches
