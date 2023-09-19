@@ -1,0 +1,9 @@
+python -m train experiment=lra/s4-listops-diag-pregate ; \
+python -m train experiment=lra/s4-listops-diag-fout ; \
+python -m train experiment=lra/s4-listops-diag-fout-pregate ; \
+python -m train experiment=lra/s4-listops-diag-pregate-gelu; \
+#python -m train experiment=lra/s4-listops-diag-fout-pregate-gelu ; \
+#python -m train experiment=lra/s4-listops-diag-fout-pregate-gelu-unidirectional ; \
+#python -m train experiment=lra/s4-listops-diag-fout-pregate-gelu-unidirectional-long ; \
+#python -m train experiment=lra/s4-listops-diag-fout-pregate-gelu-unidirectional-wide ; \
+#python -m train experiment=lra/s4-listops-diag ; \
